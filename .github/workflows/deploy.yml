@@ -14,7 +14,7 @@ jobs:
 
       - name: Deploy app on EC2
         run: |
-          cd /home/ubuntu/myapp
+          cd /home/radhika/myapp
           git pull origin main
           npm install
           pm2 restart myapp
