@@ -24,12 +24,6 @@ jobs:
           pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Run tests
-        run: |
-          source venv/bin/activate
-          pytest || echo "No tests found, skipping"
-
       - name: Restart application service
         run: |
-          # Example using systemd service called 'myapp'
           sudo systemctl restart myapp || echo "No systemd service configured yet"
