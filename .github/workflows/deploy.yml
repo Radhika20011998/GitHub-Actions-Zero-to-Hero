@@ -14,7 +14,6 @@ jobs:
 
       - name: Set up Python app
         run: |
-          cd /home/ubuntu/GitHub-Actions-Zero-to-Hero
           python3 -m venv venv
           source venv/bin/activate
           # Skip requirements if none exist
