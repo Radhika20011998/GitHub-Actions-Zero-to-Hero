@@ -1,21 +1,20 @@
-#Deployment of EC2 Instance 
 name: Deploy to EC2
 
 on:
   push:
     branches:
-      - main   # triggers when you push to main branch
+      - main
 
 jobs:
   deploy:
-    runs-on: self-hosted   # this targets your EC2 runner
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Deploy app on EC2
         run: |
-          cd ~/myapp   # path where your app lives on EC2
+          cd /home/ubuntu/myapp
           git pull origin main
           npm install
           pm2 restart myapp
