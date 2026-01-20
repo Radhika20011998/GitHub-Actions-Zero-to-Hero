@@ -1,6 +1,9 @@
 name: Deploy to EC2
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -9,14 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          script: |
-            cd /var/www/myapp
-            git pull origin main
-            npm install
-            pm2 restart myapp
+      - name: Deploy directly on EC2
+        run: |
+          cd /var/www/myapp
+          git pull origin main
+          npm install
+          pm2 restart myapp
