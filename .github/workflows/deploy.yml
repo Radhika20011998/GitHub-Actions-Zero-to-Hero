@@ -12,9 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy Node.js app on EC2
+      - name: Set up Python app
         run: |
-          cd /home/ubuntu/myapp
-          git pull origin main
-          npm install
-          pm2 restart myapp || pm2 start app.js --name myapp
+          cd /home/ubuntu/GitHub-Actions-Zero-to-Hero
+          python3 -m venv venv
+          source venv/bin/activate
+          # Skip requirements if none exist
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          python src/addition.py
