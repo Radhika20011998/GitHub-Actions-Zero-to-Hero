@@ -1,0 +1,9 @@
+name: Hello Runner Test
+on: [push]
+
+jobs:
+  hello:
+    runs-on: self-hosted
+    steps:
+      - name: Print greeting
+        run: echo "Hello from Radhika's self-hosted runner!"
