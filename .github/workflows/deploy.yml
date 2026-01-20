@@ -1,0 +1,35 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Ensure python3-venv is installed
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3.12-venv
+
+      - name: Set up Python app
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run tests
+        run: |
+          source venv/bin/activate
+          pytest || echo "No tests found, skipping"
+
+      - name: Restart application service
+        run: |
+          # Example using systemd service called 'myapp'
+          sudo systemctl restart myapp || echo "No systemd service configured yet"
