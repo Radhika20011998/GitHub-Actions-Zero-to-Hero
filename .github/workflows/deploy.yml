@@ -12,9 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy app on EC2
+      - name: Deploy Node.js app on EC2
         run: |
-          cd /home/ubuntu/myapp/src
-          npm install
+          cd /home/ubuntu/myapp
           git pull origin main
+          npm install
           pm2 restart myapp || pm2 start app.js --name myapp
